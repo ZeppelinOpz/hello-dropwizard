@@ -1,0 +1,12 @@
+version: "3"
+services:
+  hello-dropwizard:
+    build: 
+      context: .
+      dockerfile: Dockerfile.app
+  nginx:    
+    image: nginx
+    volumes:
+      - ./proxy/conf.d:/etc/nginx/conf.d 
+    ports:
+      - "8080:80"
