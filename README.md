@@ -4,7 +4,8 @@
 
 To run make commands you need: 
 
-* Install docker-compose 
+* Install docker & docker-compose 
+https://docs.docker.com/install/
 https://docs.docker.com/compose/install/
 
 * To make sure that you have gnu make
@@ -32,9 +33,9 @@ To build:
 make build
 ```
 
-Run command build the application inside a maven container. You can find the snapshot inside the target folder like you run maven build locally. Because we mount current folder to container. This step is identical with the building step at Jenkins pipeline. With using same container and same build command you can get same output in whole environment. You can fix the error before triggering ci/cd pipeline. And prevent the "code is working on my desktop, but not here" problem.
+Make build command builds the application inside a maven container. You can find the snapshot inside the target folder like you run maven build locally. Because we mount current folder to container. This step is identical with the building step at Jenkins pipeline. With using same container and same build command you can get same output in whole environment. You can fix the error before triggering ci/cd pipeline. And prevent the "code is working on my desktop, but not here" problem.
 
-Run command create 2 container:
+Make run command create 2 container:
 
 * Application container with base maven image
 * Nginx container to use as proxy server
@@ -53,6 +54,13 @@ services:
       - ./proxy/conf.d:/etc/nginx/conf.d 
     ports:
       - "8080:80"
+```
+
+You can test the applicatioin with curl commands
+
+```bash
+curl localhost:8080/hello
+curl localhost:8080/healthcheck 
 ```
 
 Application container is created from the file Dockerfile.app
