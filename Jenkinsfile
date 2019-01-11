@@ -38,7 +38,6 @@ pipeline {
                 sh "docker tag hello-dropwizard-${BRANCH_NAME}:${GIT_COMMIT} zeppelinops/hello-dropwizard-${BRANCH_NAME}:latest"
                 sh "docker push zeppelinops/hello-dropwizard-${BRANCH_NAME}:${GIT_COMMIT}"
                 sh "docker push zeppelinops/hello-dropwizard-${BRANCH_NAME}:latest"
-                sh 'test ! -z "$(docker images -q zeppelinops/aws:latest)" &&  docker rmi zeppelinops/aws:latest'
               }
             }                        
           }
